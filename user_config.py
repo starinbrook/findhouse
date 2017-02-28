@@ -26,14 +26,17 @@ setting['price'] = "p1" # 可组合，如p1p2
 # a6: 130-150平
 # a7: 150-200平
 # a8: 200平以上
-setting['area'] = "a1"
+setting['area'] = ""
 
 # 房型
 # l1: 一室
 # l2: 二室
 # l3: 三室
 # l4: 四室
-setting['layout'] = "l1"
+setting['layout'] = ""
+
+# 页数
+setting['page_number'] = 5
 
 # 结果产出文件名称
 setting['output_fname'] = "find_house_zhuyca0228.txt"

@@ -8,7 +8,7 @@
 REQUEST_URL = "http://bj.lianjia.com/ershoufang/"
 
 # 是否设置代理
-ENABLE_PROXY = True
+ENABLE_PROXY = False
 
 # 代理地址
-PROXY_ADDRESS = "124.42.7.103:80"
+PROXY_ADDRESS = "124.88.67.52:843"

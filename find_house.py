@@ -37,7 +37,7 @@ def get_page_html(url):
 	headers = {'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36'}
 	request = urllib2.Request(url,data,headers)
 	try:
-		response = urllib2.urlopen(request,timeout=10)
+		response = urllib2.urlopen(request,timeout=20)
 		return response.read()
 	except urllib2.HTTPError,e:
 		print e.code
@@ -52,7 +52,7 @@ def find_href(str):
 def page_process(html,output_fpath):
 
 	# 输出文件路径
-	fout = open(output_fpath, "w")
+	fout = open(output_fpath, "a")
 
 	soup = BeautifulSoup(html,'html.parser',from_encoding="UTF-8")
 	for node in soup.find_all('li',class_='clear'):
@@ -70,15 +70,19 @@ def page_process(html,output_fpath):
 	fout.close()
 
 def main():
+	setProxy(sys_config.ENABLE_PROXY) # 设置代理
+	output_fpath = "./outputs/%s" % user_config.setting["output_fname"]
+	page_number = int(user_config.setting['page_number'])
 	url = sys_config.REQUEST_URL
 	url += user_config.setting['layout']
 	url += user_config.setting['area']
 	url += user_config.setting['price']
-	print url
-	output_fpath = "./outputs/%s" % user_config.setting["output_fname"]
-	setProxy(sys_config.ENABLE_PROXY) # 设置代理
-	html = get_page_html(url) # 获取页面文档
-	page_process(html,output_fpath) # 处理页面并将结果保存到指定文件
+	for x in xrange(1,page_number):
+		real_url = ""
+		real_url = url + "pg" + str(x) + "/"
+		html = get_page_html(real_url) # 获取页面文档
+		page_process(html,output_fpath) # 处理页面并将结果保存到指定文件
+	print ""
 
 if __name__ == '__main__':
 	main()
