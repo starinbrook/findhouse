@@ -69,40 +69,39 @@ def page_process(html,output_fpath):
 	fout.flush()
 	fout.close()
 
-def get_url():
-	url = sys_config.REQUEST_URL
-	region = user_config.setting['region']
-	subwayline = user_config.setting['subwayline']
-	if region.strip() != "":
-		url += region
-		url += "/"
-	if subwayline.strip() != "":
-		url += subwayline
-		url += "/"
-	url += user_config.setting['heating']
-	url += user_config.setting['decoration']
-	url += user_config.setting['elevator']
-	url += user_config.setting['type']
-	url += user_config.setting['years']
-	url += user_config.setting['orientation']
-	url += user_config.setting['floor']
-	url += user_config.setting['purpose']
-	url += user_config.setting['layout']
-	url += user_config.setting['area']
-	url += user_config.setting['price']
-	return url
+def get_url_params():
+	params = ""
+	params += user_config.setting['heating']
+	params += user_config.setting['decoration']
+	params += user_config.setting['elevator']
+	params += user_config.setting['type']
+	params += user_config.setting['years']
+	params += user_config.setting['orientation']
+	params += user_config.setting['floor']
+	params += user_config.setting['purpose']
+	params += user_config.setting['layout']
+	params += user_config.setting['area']
+	params += user_config.setting['price']
+	return params
 
 def main():
 	setProxy(sys_config.ENABLE_PROXY) # 设置代理
 	output_fpath = "./outputs/%s" % user_config.setting["output_fname"]
 	page_number = int(user_config.setting['page_number'])
-	url = get_url()
-	for x in xrange(1,page_number+1):
+	url = sys_config.REQUEST_URL
+	regions = user_config.setting['region']
+	params = get_url_params()
+	for region in regions:
+		print region
 		real_url = ""
-		real_url = url + "pg" + str(x) + "/"
-		html = get_page_html(real_url) # 获取页面文档
-		page_process(html,output_fpath) # 处理页面并将结果保存到指定文件
-	print ""
+		real_url = url + region + "/" + params
+
+		for x in xrange(1,page_number+1):
+			real_url_pg = ""
+			real_url_pg = real_url + "pg" + str(x) + "/"
+			html = get_page_html(real_url_pg) # 获取页面文档
+			page_process(html,output_fpath) # 处理页面并将结果保存到指定文件
+		print ""
 
 if __name__ == '__main__':
 	main()

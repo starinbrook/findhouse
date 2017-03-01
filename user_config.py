@@ -6,6 +6,9 @@
 
 setting = {}
 
+setting['region'] = ['dongcheng','xicheng','chaoyang','haidian','fengtai','shijingshan',
+					'tongzhou','changping','daxing','yizhuangkaifaqu','shunyi',
+					'fangshan','mentougou','pinggu','huairou','miyun','yanqing'] 
 # 区域
 # dongcheng: 东城
 # xicheng: 西城
@@ -25,7 +28,7 @@ setting = {}
 # miyun: 密云
 # yanqing: 延庆
 # yanjiao: 燕郊
-setting['region'] = "daxing" # 区域和地铁线只可以设置一个
+# setting['region'] = "daxing" # 区域和地铁线只可以设置一个
 
 # 地铁线
 # li647: 1号线
@@ -47,7 +50,7 @@ setting['region'] = "daxing" # 区域和地铁线只可以设置一个
 # li43144993: 昌平线
 # li43145111: 房山线
 # li654: 机场线
-setting['subwayline'] = "" # 区域和地铁线只可以设置一个
+# setting['subwayline'] = "" # 区域和地铁线只可以设置一个
 
 # 售价
 # p1：200万以下
@@ -58,7 +61,7 @@ setting['subwayline'] = "" # 区域和地铁线只可以设置一个
 # p6: 500-800万
 # p7: 800-1000万
 # p8: 1000万以上
-setting['price'] = "p2" # 可组合，如p1p2
+setting['price'] = "p1" # 可组合，如p1p2
 
 # 面积
 # a1: 50平以下
@@ -137,4 +140,4 @@ setting['heating'] = "hy1"
 setting['page_number'] = 1
 
 # 结果产出文件名称
-setting['output_fname'] = "find_house_zhuyca0228.txt"
+setting['output_fname'] = "find_house.txt"
